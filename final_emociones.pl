@@ -71,6 +71,24 @@ sueldo_disponible_bajo(X):-
     Diferencia is Sueldo - Deuda,
     Diferencia < 1000.
 
+%listas con recursividad 
+todos_viven_en([], _).
+todos_viven_en([X|Xs], Location) :-
+    vive_en(X, Location),
+    todos_viven_en(Xs, Location).
+
+personas_mismo_trabajo(Trabajo, Personas) :-
+    findall(Persona, trabajo(Persona, Trabajo), Personas).
+
+todos_autoestima_media([]).
+todos_autoestima_media([X|Xs]) :-
+    autoestima(X, media),
+    todos_autoestima_media(Xs).
+%
+
+
+
+
 %feliz_trabajo(X) :- trabajo_(X,T), (T = agradable; T = retador), sueldo(X,S), S >3000. %feliz_trabajo(marcela).
 feliz_trabajo(X) :- (trabajo_agradable(VAR);trabajo_retador(VAR)), member(X,VAR).
 
