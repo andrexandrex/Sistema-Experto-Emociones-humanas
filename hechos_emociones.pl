@@ -1,6 +1,25 @@
 /* Reconocimiento de estado de animo de las personas */
 /* hechos */
 
+:- dynamic(edad/2).
+:- dynamic(sueldos/1).
+:- dynamic(deudas/1).
+:- dynamic(vive_solo/1).
+:- dynamic(vive_con_padres/1).
+:- dynamic(vive_en/1).
+:- dynamic(tiene_hijos/1).
+:- dynamic(es_seguro/1).
+:- dynamic(no_es_seguro/1).
+:- dynamic(circulo_social_chico/1).
+:- dynamic(circulo_social_mediano/1).
+:- dynamic(circulo_social_grande/1).
+:- dynamic(trabajo_agradable/1).
+:- dynamic(trabajo_estable/1).
+:- dynamic(trabajo_estresante/1).
+:- dynamic(trabajo_retador/1).
+:- dynamic(salud_buena/1).
+:- dynamic(salud_mala/1).
+:- dynamic(salud_media/1).
 
 
 edad(fernando,30).
