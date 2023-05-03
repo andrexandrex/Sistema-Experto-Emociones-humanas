@@ -68,19 +68,24 @@ preguntar_atributos(Nombre) :-
     ;  write('¿Cuál es la deuda de '), write(Nombre), write('? '), read(Deuda),
        retract(deudas(Deudas)),
        assert(deudas([(Nombre,Deuda)|Deudas])) ),
-    write('¿Vive solo/a? (s/n) '), read(ViveSolo), %elimnar_anteriores
-    (ViveSolo == 's' -> 
-        (vive_solo(ListaViveSolo), 
-         (member(Nombre, ListaViveSolo) -> 
-             true ; assert(vive_solo([Nombre|ListaViveSolo])))) ;
-        assert(vive_con_padres(Nombre))),
+    write('¿Vive solo o cons us padres(s/p) '), read(ViveCon),%bien
+    (ViveCon == 's' -> 
+        (vive_solo(ListaSolo), 
+         retract(vive_solo(ListaSolo)), 
+         (member(Nombre, ListaSolo) -> 
+             true ; assert(vive_solo([Nombre|ListaSolo])))) ;
+     ViveCon == 'p' -> 
+        (vive_con_padres(ListaPadres),
+         retract(vive_con_padres(ListaPadres)), 
+         (member(Nombre, ListaPadres) -> 
+             true ; assert(vive_con_padres([Nombre|ListaPadres]))))) ,
     write('Lugar donde vive '), write(Nombre), write('? '), read(Lugar),%bien
     assert(vive_en(Nombre, Lugar)),
-   write('¿Tiene hijos? (s/n) '), read(TieneHijos), %elimnar_anteriores
+    write('¿Tiene hijos? (s/n) '), read(TieneHijos),%bien
     (TieneHijos == 's' -> 
-        (tiene_hijos(ListaTieneHijos), 
-         (member(Nombre, ListaTieneHijos) -> 
-             true ; assert(tiene_hijos([Nombre|ListaTieneHijos])))) ; true),
+        (tiene_hijos(ListaActual1), append(ListaActual1, [Nombre], NuevaLista4),
+        retract(tiene_hijos(ListaActual1)), assert(tiene_hijos(NuevaLista4)));
+        true),
     write('¿Tiene un círculo social chico, mediano o grande? (c/m/g) '), read(CirculoSocial),%elimnar_anteriores
     (CirculoSocial == 'c' -> 
         (circulo_social_chico(ListaCirculoChico),
@@ -117,7 +122,7 @@ preguntar_atributos(Nombre) :-
         (trabajo_retador(ListaActual3), append(ListaActual3, [Nombre], NuevaLista3),
         retract(trabajo_retador(ListaActual3)), assert(trabajo_retador(NuevaLista3)));
         true),
-    write('¿Tiene buena, media o mala salud? (b/m/a) '), read(Salud),%eliminar_anteriores
+    write('¿Tiene buena, media o mala salud? (b/m/a) '), read(Salud),%bien
     (Salud == 'b' -> 
         (salud_buena(ListaSaludBuena), 
          retract(salud_buena(ListaSaludBuena)), 
@@ -139,11 +144,6 @@ preguntar_atributos(Nombre) :-
 
 
 
-/*memberchk((Nombre, _), Sueldos),
-    write('¿Cuál es el sueldo de '), write(Nombre), write('? '), read(Sueldo),
-    retractall(sueldos(Nombre, _)),
-    assert(sueldos(Nombre, Sueldo)),
-    process_a_query.*/
 
 
 
@@ -175,29 +175,41 @@ preguntar_atributos(Nombre) :-
 
 
 
-/*ingresa stop
-answer(stop):- write('grabando la base de conocimiento...'),nl,
-    tell('C:/Users/USER/Desktop/PROLOG/Sistema-Experto-Emociones-humanas-master/prueba1.pl'),
-    listing(personas),
-    told,
-    write('listo.'),nl.
 
-answer(Nombre):- personas(Nombre),nl,
-    write('el nombre '),
-    write(Nombre),
-    write('esta en la base de datos'),
-    nl,
-    process_a_query.
 
-answer(Nombre) :- \+personas(Nombre),
-    \+edad(Edad)
-    write('no conozco ese nombre'),nl,
-    write('Por favor agreguemos'),nl,
-    write('nombre?'),
-    read(Nombre),
-    write('gracias'),nl,nl,
-    assert(personas(Nombre)),
-    process_a_query. */
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
 
